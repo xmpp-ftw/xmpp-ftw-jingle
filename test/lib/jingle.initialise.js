@@ -35,7 +35,7 @@ describe('Jingle', function() {
         jingle.init(manager)
     })
 
-    describe('Initialise', function() {
+    describe('Initiate', function() {
       
         it('Errors if no callback provided', function(done) {
             xmpp.once('stanza', function() {
@@ -49,7 +49,7 @@ describe('Jingle', function() {
                 xmpp.removeAllListeners('stanza')
                 done()
             })
-            socket.emit('xmpp.jingle.initialise', {})
+            socket.emit('xmpp.jingle.initiate', {})
         })
         
         it('Errors if non-functional callback provided', function(done) {
@@ -64,7 +64,7 @@ describe('Jingle', function() {
                 xmpp.removeAllListeners('stanza')
                 done()
             })
-            socket.emit('xmpp.jingle.initialise', {}, true)
+            socket.emit('xmpp.jingle.initiate', {}, true)
         })
             
         it('Errors if no \'to\' key provided', function(done) {
@@ -82,7 +82,7 @@ describe('Jingle', function() {
                 done()
             }
             socket.emit(
-                'xmpp.jingle.initialise',
+                'xmpp.jingle.initiate',
                 request,
                 callback
             )
@@ -115,7 +115,7 @@ describe('Jingle', function() {
   
                 done()
             })
-            socket.emit('xmpp.jingle.initialise', request, function() {})
+            socket.emit('xmpp.jingle.initiate', request, function() {})
         })
         
     })
