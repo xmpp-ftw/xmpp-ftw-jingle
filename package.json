@@ -28,7 +28,8 @@
     "url": "https://github.com/lloydwatkin/xmpp-ftw-jingle/issues"
   },
   "dependencies": {
-    "ltx": "*"
+    "ltx": "*",
+    "jingle": "~0.2.4"
   },
   "devDependencies": {
     "mocha": "~1.8.1",

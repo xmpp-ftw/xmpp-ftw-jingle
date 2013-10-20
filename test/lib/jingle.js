@@ -27,9 +27,9 @@ describe('Jingle', function() {
     describe('Handles', function() {
         
         it('Returns false for all stanzas', function() {
-            avatar.handles(ltx.parse('<iq/>')).should.be.false
+            jingle.handles(ltx.parse('<iq/>')).should.be.false
         })
         
     })
 
-})   
+})

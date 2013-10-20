@@ -1,1 +1,1 @@
-module.exports = require('./lib/avatar')
+module.exports = require('./lib/jingle')
