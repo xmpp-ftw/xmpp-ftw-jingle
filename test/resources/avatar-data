@@ -1,0 +1,10 @@
+<iq type="result" from="juliet@shakespeare.lit" 
+    to="romeo@shakespeare.lit/castle" id="1">
+  <pubsub xmlns="http://jabber.org/protocol/pubsub">
+    <items node="urn:xmpp:avatar:data">
+      <item id="123456abcef">
+        <data xmlns="urn:xmpp:avatar:data">some-image-data</data>
+      </item>
+    </items>
+  </pubsub>
+</iq>
