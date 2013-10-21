@@ -256,7 +256,7 @@ describe('Jingle', function() {
                 encryptions.length.should.equal(1)
                 var encryption = encryptions[0]
                 
-                var encryptionRequest =  request.jingle.contents[0]
+                var encryptionRequest = request.jingle.contents[0]
                     .description
                     .encryption[0]
                 encryption.attrs['key-params'].should.equal(encryptionRequest.keyParams)
@@ -267,6 +267,43 @@ describe('Jingle', function() {
             })
             socket.emit('xmpp.jingle.initiate', request, function() {})
         })
+        
+        it('Sends expected stanza with misc description fields', function(done) {
+
+            xmpp.once('stanza', function(stanza) {
+                var description = stanza
+                     .getChild('jingle', jingle.NS)
+                     .getChildren('content')[0]
+                    .getChild('description', jingle.NS_RTP)
+                description.getChild('rtcp-mux').should.exist
+                
+                var miscRequest = request.jingle.contents[0].description
+                
+                var ssrcs = description.getChildren('ssrc')
+                ssrcs.length.should.equal(1)
+                var ssrc = ssrcs[0]
+                ssrc.should.exist
+                ssrc.attrs.xmlns.should.equal(jingle.NS_ESTOS)
+                ssrc.attrs.msid.should.equal(miscRequest.ssrcs[0].msid)
+                ssrc.attrs.ssrc.should.equal(miscRequest.ssrcs[0].ssrc)
+                ssrc.attrs.label.should.equal(miscRequest.ssrcs[0].label)
+                ssrc.attrs.mslabel.should.equal(miscRequest.ssrcs[0].mslabel)
+                ssrc.attrs.cname.should.equal(miscRequest.ssrcs[0].cname)
+                
+                var headers = description.getChildren(miscRequest.descType + '-hdrext')
+                headers.length.should.equal(1)
+                var header = headers[0]
+                header.attrs.xmlns
+                    .should.equal(miscRequest.headerExtensions[0].uri)
+                header.attrs.id
+                    .should.equal(miscRequest.headerExtensions[0].id)
+                header.attrs.senders
+                    .should.equal(miscRequest.headerExtensions[0].senders)
+                done()
+            })
+            socket.emit('xmpp.jingle.initiate', request, function() {})
+        })        
+        
     })
 
 })
