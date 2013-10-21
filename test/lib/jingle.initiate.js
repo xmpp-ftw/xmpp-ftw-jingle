@@ -5,9 +5,10 @@ var should = require('should')
 
 describe('Jingle', function() {
 
-    var jingle, socket, xmpp, manager
+    var jingle, socket, xmpp, manager, request
 
     before(function() {
+        request = require('../resources/initiate.json')
         socket = new helper.Eventer()
         xmpp = new helper.Eventer()
         manager = {
@@ -88,11 +89,54 @@ describe('Jingle', function() {
             )
         })
 
+        it('Errors if there\'s no \'jingle\' key', function(done) {
+            var request = { to: 'juliet@shakespeare.lit' }
+            xmpp.once('stanza', function() {
+                done('Unexpected outgoing stanza')
+            })
+            var callback = function(error, success) {
+                should.not.exist(success)
+                error.type.should.equal('modify')
+                error.condition.should.equal('client-error')
+                error.description.should.equal('Missing \'jingle\' key')
+                error.request.should.eql(request)
+                xmpp.removeAllListeners('stanza')
+                done()
+            }
+            socket.emit(
+                'xmpp.jingle.initiate',
+                request,
+                callback
+            )
+        })
+
+        it('Errors if there\'s no \'sid\' key', function(done) {
+            var request = { to: 'juliet@shakespeare.lit', jingle: {} }
+            xmpp.once('stanza', function() {
+                done('Unexpected outgoing stanza')
+            })
+            var callback = function(error, success) {
+                should.not.exist(success)
+                error.type.should.equal('modify')
+                error.condition.should.equal('client-error')
+                error.description.should.equal('Missing \'sid\' key')
+                error.request.should.eql(request)
+                xmpp.removeAllListeners('stanza')
+                done()
+            }
+            socket.emit(
+                'xmpp.jingle.initiate',
+                request,
+                callback
+            )
+        })
+
         it('Sends expected stanza', function(done) {
             var request = {
                 to: 'juliet@shakespeare.lit/balcony',
-                sessionId: '12345',
-                name: 'session-name-value'
+                jingle: {
+                  sid: '12345'
+                }
             } 
             
             xmpp.once('stanza', function(stanza) {

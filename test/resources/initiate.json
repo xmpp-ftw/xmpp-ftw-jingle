@@ -5,7 +5,9 @@
       "sid": "12345",
       "contents": [
         {
-          "creator": "initiator",
+           "creator": "initiator",
+           "name": "audio",
+           "senders": "both",
            "description": {
              "descType": "rtp",
              "encryption": [{
@@ -53,6 +55,44 @@
               "ufrag": "ufrag-value"
             }
           }
+        },
+        {
+            "creator": "initiator",
+            "description": {
+              "descType": "rtp",
+              "encryption": [{
+                "cipherSuite": "AES_CM_128_HMAC_SHA1_80",
+                "keyParams": "inline:aGNmCFU0vIat4aIbRf7b62xlN9u87A7Kz7p5BYkA",
+                "sessionParams": "",
+                "tag": "1"
+              }],
+              "feedback": [],
+              "headerExtensions": [{
+                "id": "2",
+                "senders": "both",
+                "uri": "urn:ietf:params:rtp-hdrext:toffset"
+              }],
+              "media": "video",
+              "mux": true,
+              "payloads": [
+                { "channels": "1", "clockrate": "90000", "feedback": [
+                   { "id": "100", "parameters": [], "subtype": "", "type": "nack" },
+                   { "id": "100", "parameters": [], "subtype": "", "type": "nack" },
+                   { "id": "100", "parameters": [], "subtype": "", "type": "goog-remb" }
+                ], "id": "100", "name": "VP8" }
+              ]
+            },
+            "name": "video",
+            "senders": "both",
+            "transport": {
+              "candidates": [],
+              "fingerprints": [{
+                  "hash": "sha-256", "value": "fingerprint-hash-value"
+              }],
+              "pwd": "some-pwd-value",
+              "transType": "iceUdp",
+              "ufrag": "ufrag-value"
+            }
         }
       ],
       "groupings": [

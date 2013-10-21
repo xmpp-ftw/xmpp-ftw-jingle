@@ -1,0 +1,53 @@
+<iq xmlns="jabber:client" id="6dc8388e-80e5-4abd-8497-729dec02c489-5" type="set" to="8e29e462-ea4e-44b8-b10a-bac5539bedac@anon.lance.im/83207ca9-b444-478d-baee-59ef1a67769d" from="6f5a5a90-74da-47a2-b178-dc81b8927962@anon.lance.im/52e3bcdb-348a-4328-959a-c7da726c4852" xml:lang="" xmlns="http://www.w3.org/XML/1998/namespace">
+  <jingle xmlns="urn:xmpp:jingle:1" action="session-initiate" sid="1382385667733">
+    <content name="audio" senders="both" creator="initiator">
+      <description xmlns="urn:xmpp:jingle:apps:rtp:1" ssrc="1051892989" media="audio">
+        <payload-type name="opus" clockrate="48000" id="111" channels="2">
+          <parameter value="10" name="minptime"/>
+        </payload-type>
+        <payload-type name="ISAC" clockrate="16000" id="103" channels="1"/>
+        <payload-type name="ISAC" clockrate="32000" id="104" channels="1"/>
+        <payload-type name="PCMU" clockrate="8000" id="0" channels="1"/>
+        <payload-type name="PCMA" clockrate="8000" id="8" channels="1"/>
+        <payload-type name="CN" clockrate="32000" id="106" channels="1"/>
+        <payload-type name="CN" clockrate="16000" id="105" channels="1"/>
+        <payload-type name="CN" clockrate="8000" id="13" channels="1"/>
+        <payload-type name="telephone-event" clockrate="8000" id="126" channels="1"/>
+        <encryption required="1">
+          <crypto key-params="inline:Wt+rYXZg28a9/Nzka4AlKB8xKickGykIJ1BzYVK9" crypto-suite="AES_CM_128_HMAC_SHA1_80" tag="1"/>
+        </encryption>
+        <rtp-hdrext xmlns="urn:xmpp:jingle:apps:rtp:rtp-hdrext:0" id="1" senders="both" uri="urn:ietf:params:rtp-hdrext:ssrc-audio-level"/>
+        <rtcp-mux/>
+        <ssrc xmlns="http://estos.de/ns/ssrc" msid="E3VyHvKgHuTl2yjz771Msow30e01CKaveurb E3VyHvKgHuTl2yjz771Msow30e01CKaveurba0" ssrc="1051892989" label="E3VyHvKgHuTl2yjz771Msow30e01CKaveurba0" cname="lE5XSsrY/2TqpABJ" mslabel="E3VyHvKgHuTl2yjz771Msow30e01CKaveurb"/>
+      </description>
+      <transport xmlns="urn:xmpp:jingle:transports:ice-udp:1" pwd="aVc0GOR0r6wE8yeUQoeCr1hS" ufrag="2BirJjwFmx7+STZg">
+        <fingerprint xmlns="urn:xmpp:tmp:jingle:apps:dtls:0" hash="sha-1">EE:17:2D:2D:B6:55:5F:28:88:71:87:FD:FD:6F:1C:8D:E3:24:E5:C0</fingerprint>
+      </transport>
+    </content>
+    <content name="video" senders="both" creator="initiator">
+      <description xmlns="urn:xmpp:jingle:apps:rtp:1" ssrc="3895726482" media="video">
+        <payload-type name="VP8" clockrate="90000" id="100" channels="1">
+          <rtcp-fb xmlns="urn:xmpp:jingle:apps:rtp:rtcp-fb:0" type="ccm" subtype="fir"/>
+          <rtcp-fb xmlns="urn:xmpp:jingle:apps:rtp:rtcp-fb:0" type="nack"/>
+          <rtcp-fb xmlns="urn:xmpp:jingle:apps:rtp:rtcp-fb:0" type="goog-remb"/>
+        </payload-type>
+        <payload-type name="red" clockrate="90000" id="116" channels="1"/>
+        <payload-type name="ulpfec" clockrate="90000" id="117" channels="1"/>
+        <encryption required="1">
+          <crypto key-params="inline:Wt+rYXZg28a9/Nzka4AlKB8xKickGykIJ1BzYVK9" crypto-suite="AES_CM_128_HMAC_SHA1_80" tag="1"/>
+        </encryption>
+        <rtp-hdrext xmlns="urn:xmpp:jingle:apps:rtp:rtp-hdrext:0" id="2" senders="both" uri="urn:ietf:params:rtp-hdrext:toffset"/>
+        <rtp-hdrext xmlns="urn:xmpp:jingle:apps:rtp:rtp-hdrext:0" id="3" senders="both" uri="http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time"/>
+        <rtcp-mux/>
+        <ssrc xmlns="http://estos.de/ns/ssrc" msid="E3VyHvKgHuTl2yjz771Msow30e01CKaveurb E3VyHvKgHuTl2yjz771Msow30e01CKaveurbv0" ssrc="3895726482" label="E3VyHvKgHuTl2yjz771Msow30e01CKaveurbv0" cname="lE5XSsrY/2TqpABJ" mslabel="E3VyHvKgHuTl2yjz771Msow30e01CKaveurb"/>
+      </description>
+      <transport xmlns="urn:xmpp:jingle:transports:ice-udp:1" pwd="aVc0GOR0r6wE8yeUQoeCr1hS" ufrag="2BirJjwFmx7+STZg">
+        <fingerprint xmlns="urn:xmpp:tmp:jingle:apps:dtls:0" hash="sha-1">EE:17:2D:2D:B6:55:5F:28:88:71:87:FD:FD:6F:1C:8D:E3:24:E5:C0</fingerprint>
+      </transport>
+    </content>
+    <group xmlns="urn:ietf:rfc:5888" semantics="BUNDLE">
+      <content name="audio"/>
+      <content name="video"/>
+    </group>
+  </jingle>
+</iq>
