@@ -1,0 +1,65 @@
+{
+    "to": "juliet@shakespeare.lit/balcony",
+    "type": "set",
+    "jingle": {
+      "sid": "12345",
+      "contents": [
+        {
+          "creator": "initiator",
+           "description": {
+             "descType": "rtp",
+             "encryption": [{
+               "cipherSuite": "AES_CM_128_HMAC_SHA1_80",
+               "keyParams": "keyParams-value",
+               "sessionParams": "",
+               "tag": "1"
+             }],
+             "feedback": [],
+             "headerExtensions": [
+                { "id": "1", "senders": "both", "uri": "urn:audio:etc" }
+             ],
+             "media": "audio",
+             "mux": true,
+             "payloads": [{
+                "channels": "2",
+                "clockrate": "48000",
+                "feedback": [],
+                "id": "111",
+                "name": "opus",
+                "parameters": [
+                  { "key": "minptime", "value": "10" }
+                ]
+              }],
+              "ssrc": "ssrc-number",
+              "ssrcs": [{
+                    "cname": "cname-value",
+                    "label": "label-value",
+                    "msid": "msid-value",
+                    "mslabel": "mslabel-value",
+                    "ssrc": "ssrc-value"
+              }],
+              "name": "audio",
+              "senders": "both",
+              "transport": {
+              "candidates": [],
+              "fingerprints": [
+                {
+                  "hash": "sha-256",
+                  "value": "fingerprints-hash-value"
+                }
+              ],
+              "pwd": "pwd-value",
+              "transType": "iceUdp",
+              "ufrag": "ufrag-value"
+            }
+          }
+        }
+      ],
+      "groupings": [
+         {
+            "contents": ["audio", "video"],
+            "semantics": "BUNDLE"
+         }
+      ]
+    }
+}
