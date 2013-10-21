@@ -199,7 +199,7 @@ describe('Jingle', function() {
                 description.attrs.media
                     .should.equal(request.jingle.contents[0].description.media)
                 var payloads = description.getChildren('payload-type')
-                payloads.length.should.equal(1)
+                payloads.length.should.equal(10)
                 var payload = payloads[0]
                 var requestPayload = request.jingle.contents[0].description.payloads[0]
                 payload.attrs.channels.should.equal(requestPayload.channels)
@@ -226,7 +226,7 @@ describe('Jingle', function() {
                      .getChildren('content')[0]
                     .getChild('description', jingle.NS_RTP)
                     .getChildren('payload-type')
-                payloads.length.should.equal(1)
+                payloads.length.should.equal(10)
                 var payload = payloads[0]
                 var requestPayload = request.jingle.contents[0].description.payloads[0]
                 payload.attrs.channels.should.equal(requestPayload.channels)
@@ -303,7 +303,42 @@ describe('Jingle', function() {
             })
             socket.emit('xmpp.jingle.initiate', request, function() {})
         })        
+
+        it('Sends expected stanza with transport', function(done) {
+
+            xmpp.once('stanza', function(stanza) {
+                var transport = stanza
+                     .getChild('jingle', jingle.NS)
+                     .getChildren('content')[0]
+                     .getChild('transport', jingle.NS_TRANSPORT)
+                var transportRequest = request.jingle.contents[0].transport
+                
+                transport.should.exist
+                transport.attrs.pwd.should.equal(transportRequest.pwd)
+                transport.attrs.ufrag.should.equal(transportRequest.ufrag)
+                done()
+            })
+            socket.emit('xmpp.jingle.initiate', request, function() {})
+        })
         
+        /**
+         "candidates": [],
+                "fingerprints": [
+                  {
+                    "hash": "sha-256",
+                    "value": "fingerprints-hash-value"
+                  }
+                ],
+                "pwd": "pwd-value",
+                "transType": "iceUdp",
+                "ufrag": "ufrag-value"
+        */
+        
+        /*
+        <transport xmlns="urn:xmpp:jingle:transports:ice-udp:1" pwd="aVc0GOR0r6wE8yeUQoeCr1hS" ufrag="2BirJjwFmx7+STZg">
+        <fingerprint xmlns="urn:xmpp:tmp:jingle:apps:dtls:0" hash="sha-1">EE:17:2D:2D:B6:55:5F:28:88:71:87:FD:FD:6F:1C:8D:E3:24:E5:C0</fingerprint>
+      </transport>
+      */
     })
 
 })

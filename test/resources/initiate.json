@@ -1,105 +1,273 @@
 {
-    "to": "juliet@shakespeare.lit/balcony",
-    "type": "set",
-    "jingle": {
-      "sid": "12345",
-      "contents": [
-        {
-           "creator": "initiator",
-           "name": "audio",
-           "senders": "both",
-           "description": {
-             "descType": "rtp",
-             "encryption": [{
-               "cipherSuite": "AES_CM_128_HMAC_SHA1_80",
-               "keyParams": "keyParams-value",
-               "sessionParams": "",
-               "tag": "1"
-             }],
-             "feedback": [],
-             "headerExtensions": [
-                { "id": "1", "senders": "both", "uri": "urn:audio:etc" }
-             ],
-             "media": "audio",
-             "mux": true,
-             "payloads": [{
-                "channels": "2",
-                "clockrate": "48000",
-                "feedback": [],
-                "id": "111",
-                "name": "opus",
-                "parameters": [
-                  { "key": "minptime", "value": "10" }
-                ]
-              }],
-              "ssrc": "ssrc-number",
-              "ssrcs": [{
-                    "cname": "cname-value",
-                    "label": "label-value",
-                    "msid": "msid-value",
-                    "mslabel": "mslabel-value",
-                    "ssrc": "ssrc-value"
-              }],
-              "name": "audio",
-              "senders": "both",
-              "transport": {
-              "candidates": [],
-              "fingerprints": [
-                {
-                  "hash": "sha-256",
-                  "value": "fingerprints-hash-value"
-                }
-              ],
-              "pwd": "pwd-value",
-              "transType": "iceUdp",
-              "ufrag": "ufrag-value"
-            }
-          }
-        },
-        {
-            "creator": "initiator",
-            "description": {
-              "descType": "rtp",
-              "encryption": [{
-                "cipherSuite": "AES_CM_128_HMAC_SHA1_80",
-                "keyParams": "inline:aGNmCFU0vIat4aIbRf7b62xlN9u87A7Kz7p5BYkA",
-                "sessionParams": "",
-                "tag": "1"
-              }],
-              "feedback": [],
-              "headerExtensions": [{
-                "id": "2",
-                "senders": "both",
-                "uri": "urn:ietf:params:rtp-hdrext:toffset"
-              }],
-              "media": "video",
-              "mux": true,
-              "payloads": [
-                { "channels": "1", "clockrate": "90000", "feedback": [
-                   { "id": "100", "parameters": [], "subtype": "", "type": "nack" },
-                   { "id": "100", "parameters": [], "subtype": "", "type": "nack" },
-                   { "id": "100", "parameters": [], "subtype": "", "type": "goog-remb" }
-                ], "id": "100", "name": "VP8" }
-              ]
-            },
-            "name": "video",
-            "senders": "both",
-            "transport": {
-              "candidates": [],
-              "fingerprints": [{
-                  "hash": "sha-256", "value": "fingerprint-hash-value"
-              }],
-              "pwd": "some-pwd-value",
-              "transType": "iceUdp",
-              "ufrag": "ufrag-value"
-            }
-        }
-      ],
-      "groupings": [
+   "to":"peer@example.com/resouce",
+   "type":"set",
+   "jingle":{
+      "contents":[
          {
-            "contents": ["audio", "video"],
-            "semantics": "BUNDLE"
+            "creator":"initiator",
+            "name":"audio",
+            "description":{
+               "descType":"rtp",
+               "media":"audio",
+               "payloads":[
+                  {
+                     "id":"111",
+                     "name":"opus",
+                     "clockrate":"48000",
+                     "channels":"2",
+                     "feedback":[
+
+                     ],
+                     "parameters":[
+                        {
+                           "key":"minptime",
+                           "value":"10"
+                        }
+                     ]
+                  },
+                  {
+                     "id":"103",
+                     "name":"ISAC",
+                     "clockrate":"16000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  },
+                  {
+                     "id":"104",
+                     "name":"ISAC",
+                     "clockrate":"32000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  },
+                  {
+                     "id":"0",
+                     "name":"PCMU",
+                     "clockrate":"8000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  },
+                  {
+                     "id":"8",
+                     "name":"PCMA",
+                     "clockrate":"8000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  },
+                  {
+                     "id":"107",
+                     "name":"CN",
+                     "clockrate":"48000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  },
+                  {
+                     "id":"106",
+                     "name":"CN",
+                     "clockrate":"32000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  },
+                  {
+                     "id":"105",
+                     "name":"CN",
+                     "clockrate":"16000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  },
+                  {
+                     "id":"13",
+                     "name":"CN",
+                     "clockrate":"8000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  },
+                  {
+                     "id":"126",
+                     "name":"telephone-event",
+                     "clockrate":"8000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  }
+               ],
+               "encryption":[
+                  {
+                     "tag":"1",
+                     "cipherSuite":"AES_CM_128_HMAC_SHA1_80",
+                     "keyParams":"inline:EwN4nicDelI9pradqeXwjvJVjhIZthVgukUu33Of",
+                     "sessionParams":""
+                  }
+               ],
+               "feedback":[
+
+               ],
+               "headerExtensions":[
+                  {
+                     "id":"1",
+                     "senders":"both",
+                     "uri":"urn:ietf:params:rtp-hdrext:ssrc-audio-level"
+                  }
+               ],
+               "ssrc":"445948959",
+               "mux":true,
+               "ssrcs":[
+                  {
+                     "cname":"RbR04HtIjW+Sa+yz",
+                     "msid":"uwwsnlQmzOrjxCsin4Z5lQ5XVpUFHQgUYLgo uwwsnlQmzOrjxCsin4Z5lQ5XVpUFHQgUYLgoa0",
+                     "mslabel":"uwwsnlQmzOrjxCsin4Z5lQ5XVpUFHQgUYLgo",
+                     "label":"uwwsnlQmzOrjxCsin4Z5lQ5XVpUFHQgUYLgoa0",
+                     "ssrc":"445948959"
+                  }
+               ]
+            },
+            "transport":{
+               "transType":"iceUdp",
+               "candidates":[
+
+               ],
+               "fingerprints":[
+                  {
+                     "hash":"sha-256",
+                     "value":"39:52:60:61:9D:6B:97:2A:43:DE:E0:BD:80:4B:2D:EE:A3:00:72:FE:FF:11:8E:43:85:06:4A:14:80:FE:9F:DD"
+                  }
+               ],
+               "ufrag":"TESg/uYDt8nNomZd",
+               "pwd":"abQXlDvFdLKIVdRDdg1t5Tbn"
+            },
+            "senders":"both"
+         },
+         {
+            "creator":"initiator",
+            "name":"video",
+            "description":{
+               "descType":"rtp",
+               "media":"video",
+               "payloads":[
+                  {
+                     "id":"100",
+                     "name":"VP8",
+                     "clockrate":"90000",
+                     "channels":"1",
+                     "feedback":[
+                        {
+                           "id":"100",
+                           "type":"ccm",
+                           "subtype":"fir",
+                           "parameters":[
+
+                           ]
+                        },
+                        {
+                           "id":"100",
+                           "type":"nack",
+                           "subtype":"",
+                           "parameters":[
+
+                           ]
+                        },
+                        {
+                           "id":"100",
+                           "type":"goog-remb",
+                           "subtype":"",
+                           "parameters":[
+
+                           ]
+                        }
+                     ]
+                  },
+                  {
+                     "id":"116",
+                     "name":"red",
+                     "clockrate":"90000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  },
+                  {
+                     "id":"117",
+                     "name":"ulpfec",
+                     "clockrate":"90000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  }
+               ],
+               "encryption":[
+                  {
+                     "tag":"1",
+                     "cipherSuite":"AES_CM_128_HMAC_SHA1_80",
+                     "keyParams":"inline:EwN4nicDelI9pradqeXwjvJVjhIZthVgukUu33Of",
+                     "sessionParams":""
+                  }
+               ],
+               "feedback":[
+
+               ],
+               "headerExtensions":[
+                  {
+                     "id":"2",
+                     "senders":"both",
+                     "uri":"urn:ietf:params:rtp-hdrext:toffset"
+                  }
+               ],
+               "ssrc":"797563643",
+               "mux":true,
+               "ssrcs":[
+                  {
+                     "cname":"RbR04HtIjW+Sa+yz",
+                     "msid":"uwwsnlQmzOrjxCsin4Z5lQ5XVpUFHQgUYLgo uwwsnlQmzOrjxCsin4Z5lQ5XVpUFHQgUYLgov0",
+                     "mslabel":"uwwsnlQmzOrjxCsin4Z5lQ5XVpUFHQgUYLgo",
+                     "label":"uwwsnlQmzOrjxCsin4Z5lQ5XVpUFHQgUYLgov0",
+                     "ssrc":"797563643"
+                  }
+               ]
+            },
+            "transport":{
+               "transType":"iceUdp",
+               "candidates":[
+
+               ],
+               "fingerprints":[
+                  {
+                     "hash":"sha-256",
+                     "value":"39:52:60:61:9D:6B:97:2A:43:DE:E0:BD:80:4B:2D:EE:A3:00:72:FE:FF:11:8E:43:85:06:4A:14:80:FE:9F:DD"
+                  }
+               ],
+               "ufrag":"TESg/uYDt8nNomZd",
+               "pwd":"abQXlDvFdLKIVdRDdg1t5Tbn"
+            },
+            "senders":"both"
          }
-      ]
-    }
+      ],
+      "groupings":[
+         {
+            "semantics":"BUNDLE",
+            "contents":[
+               "audio",
+               "video"
+            ]
+         }
+      ],
+      "sid":"1382398245712",
+      "action":"session-initiate"
+   }
 }
