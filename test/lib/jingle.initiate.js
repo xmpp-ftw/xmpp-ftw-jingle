@@ -147,21 +147,126 @@ describe('Jingle', function() {
                 var element = stanza.getChild('jingle', jingle.NS)
                 element.should.exist
                 element.attrs.action.should.equal('session-initiate')
-                element.attrs.sid.should.equal(request.sessionId)
+                element.attrs.sid.should.equal(request.jingle.sid)
                 element.attrs.initiator.should.equal(
                    manager.fullJid.user + '@' + manager.fullJid.domain + '/' +
                    manager.fullJid.resource
                 )
-                var content = element.getChild('content')
-                content.should.exist
-                content.attrs.creator.should.equal('initiator')
-                content.attrs.name.should.equal(request.name)
-  
                 done()
             })
             socket.emit('xmpp.jingle.initiate', request, function() {})
         })
+
+        it('Sends expected stanza with contents', function(done) {
+
+            xmpp.once('stanza', function(stanza) {
+                var contents = stanza
+                     .getChild('jingle', jingle.NS)
+                     .getChildren('content')
+                contents.length.should.equal(2)
+                var content = contents[0]
+                content.should.exist
+                content.attrs.creator
+                    .should.equal(request.jingle.contents[0].creator)
+                content.attrs.name
+                    .should.equal(request.jingle.contents[0].name)
+                content.attrs.senders
+                    .should.equal(request.jingle.contents[0].senders)
+                
+                content = contents[1]
+                content.should.exist
+                content.attrs.creator
+                    .should.equal(request.jingle.contents[1].creator)
+                content.attrs.name
+                    .should.equal(request.jingle.contents[1].name)
+                content.attrs.senders
+                    .should.equal(request.jingle.contents[1].senders)
+                done()
+            })
+            socket.emit('xmpp.jingle.initiate', request, function() {})
+        })
+
+        it('Sends expected stanza with description', function(done) {
+
+            xmpp.once('stanza', function(stanza) {
+                var description = stanza
+                     .getChild('jingle', jingle.NS)
+                     .getChildren('content')[0]
+                    .getChild('description', jingle.NS_RTP)
+                description.should.exist
+                description.attrs.ssrc
+                    .should.equal(request.jingle.contents[0].description.ssrc)
+                description.attrs.media
+                    .should.equal(request.jingle.contents[0].description.media)
+                var payloads = description.getChildren('payload-type')
+                payloads.length.should.equal(1)
+                var payload = payloads[0]
+                var requestPayload = request.jingle.contents[0].description.payloads[0]
+                payload.attrs.channels.should.equal(requestPayload.channels)
+                payload.attrs.clockrate.should.equal(requestPayload.clockrate)
+                payload.attrs.name.should.equal(requestPayload.name)
+                payload.attrs.id.should.equal(requestPayload.id)
+                
+                var parameters = payload.getChildren('parameter')
+                parameters.length.should.equal(1)
+                var parameter = parameters[0]
+                parameter.attrs.name.should.equal(requestPayload.parameters[0].key)
+                parameter.attrs.value.should.equal(requestPayload.parameters[0].value)
+
+                done()
+            })
+            socket.emit('xmpp.jingle.initiate', request, function() {})
+        })
+
+        it('Sends expected stanza with payload description', function(done) {
+
+            xmpp.once('stanza', function(stanza) {
+                var payloads = stanza
+                     .getChild('jingle', jingle.NS)
+                     .getChildren('content')[0]
+                    .getChild('description', jingle.NS_RTP)
+                    .getChildren('payload-type')
+                payloads.length.should.equal(1)
+                var payload = payloads[0]
+                var requestPayload = request.jingle.contents[0].description.payloads[0]
+                payload.attrs.channels.should.equal(requestPayload.channels)
+                payload.attrs.clockrate.should.equal(requestPayload.clockrate)
+                payload.attrs.name.should.equal(requestPayload.name)
+                payload.attrs.id.should.equal(requestPayload.id)
+                
+                var parameters = payload.getChildren('parameter')
+                parameters.length.should.equal(1)
+                var parameter = parameters[0]
+                parameter.attrs.name.should.equal(requestPayload.parameters[0].key)
+                parameter.attrs.value.should.equal(requestPayload.parameters[0].value)
+
+                done()
+            })
+            socket.emit('xmpp.jingle.initiate', request, function() {})
+        }) 
         
+        it('Sends expected stanza with encryption description', function(done) {
+
+            xmpp.once('stanza', function(stanza) {
+                var encryptions = stanza
+                     .getChild('jingle', jingle.NS)
+                     .getChildren('content')[0]
+                    .getChild('description', jingle.NS_RTP)
+                    .getChild('encryption').getChildren('crypto')
+                encryptions.length.should.equal(1)
+                var encryption = encryptions[0]
+                
+                var encryptionRequest =  request.jingle.contents[0]
+                    .description
+                    .encryption[0]
+                encryption.attrs['key-params'].should.equal(encryptionRequest.keyParams)
+                encryption.attrs['crypto-suite'].should.equal(encryptionRequest.cipherSuite)
+                encryption.attrs.tag.should.equal(encryptionRequest.tag)
+                should.not.exist(encryption.attrs['session-params'])
+                done()
+            })
+            socket.emit('xmpp.jingle.initiate', request, function() {})
+        })
     })
 
-})   
+})
