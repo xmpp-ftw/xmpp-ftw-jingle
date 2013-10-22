@@ -1,0 +1,31 @@
+{
+   "from":"juliet@shakespeare.lit/balcony",
+   "type":"set",
+   "sid":"1382399117924",
+   "action":"transport-info",
+   "jingle":{
+      "contents":[
+         {
+            "name":"audio",
+            "creator":"initiator",
+            "transport":{
+               "transType":"iceUdp",
+               "candidates":[
+                  {
+                     "foundation":"1529647030",
+                     "component":"1",
+                     "protocol":"udp",
+                     "priority":"2113937151",
+                     "ip":"192.12.211.22",
+                     "port":"63522",
+                     "type":"host",
+                     "generation":"0",
+                     "network":"1",
+                     "id":"0.sbvdku3dbz"
+                  }
+               ]
+            }
+         }
+      ]
+   }
+}

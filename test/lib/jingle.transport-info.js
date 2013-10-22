@@ -10,6 +10,7 @@ describe('Jingle', function() {
     before(function() {
         request = require('../resources/json/transport-info.json')
         stanza  = helper.getStanza('stanzas/transport-info')
+        
         socket  = new helper.Eventer()
         xmpp    = new helper.Eventer()
         manager = {
@@ -207,6 +208,16 @@ describe('Jingle', function() {
     })
     
     describe('Incoming transport Info', function() {
+
+        it('Generates expected JSON payload', function(done) {
+            socket.on('xmpp.jingle.info', function(data) {
+                data.should.eql(
+                    require('../resources/json/transport-info-incoming.json')
+                )
+                done()
+            })
+            jingle.handle(stanza).should.be.trues
+        })
         
     })
 

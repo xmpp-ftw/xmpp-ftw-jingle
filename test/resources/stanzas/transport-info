@@ -1,5 +1,5 @@
-<iq xmlns="jabber:client" id="6" type="set" to="romeo@shakespeare.lit/desktop" from="juliet@shakespeare.litt/balcony">
-    <jingle xmlns="urn:xmpp:jingle:1" action="transport-info" sid="1382385667733">
+<iq xmlns="jabber:client" id="6" type="set" to="romeo@shakespeare.lit/desktop" from="juliet@shakespeare.lit/balcony">
+    <jingle xmlns="urn:xmpp:jingle:1" action="transport-info" sid="1382399117924">
         <content name="audio" creator="initiator">
             <transport xmlns="urn:xmpp:jingle:transports:ice-udp:1">
                 <candidate type="host" protocol="udp" id="0.sbvdku3dbz" ip="192.12.211.22" component="1" port="63522" foundation="1529647030" generation="0" priority="2113937151" network="1" />
