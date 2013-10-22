@@ -208,10 +208,6 @@ describe('Jingle', function() {
     
     describe('Incoming transport Info', function() {
         
-        it('Handles jingle requests', function() {
-            jingle.handles(stanza).should.be.true
-        })
-        
     })
 
 })
