@@ -339,8 +339,35 @@ describe('Jingle', function() {
                 done()
             })
             socket.emit('xmpp.jingle.initiate', request, function() {})
-        })        
+        }) 
+        
+        it('Can handle an error response', function(done) {
 
+            xmpp.once('stanza', function() {
+                manager.makeCallback(helper.getStanza('iq-error'))
+            })
+            var callback = function(error, data) {
+                should.not.exist(data)
+                error.type.should.equal('cancel')
+                error.condition.should.equal('error-condition')
+                xmpp.removeAllListeners('stanza')
+                done()
+            }
+            socket.emit('xmpp.jingle.initiate', request, callback)
+        })
+        
+        it('Can handle an success response', function(done) {
+
+            xmpp.once('stanza', function() {
+                manager.makeCallback(helper.getStanza('iq-result'))
+            })
+            var callback = function(error, success) {
+                should.not.exist(error)
+                success.should.be.true
+                done()
+            }
+            socket.emit('xmpp.jingle.initiate', request, callback)
+        })
     })
 
 })
