@@ -1,0 +1,31 @@
+{
+   "to":"peer@example.com/resouce",
+   "type":"set",
+   "jingle":{
+      "contents":[
+         {
+            "name":"audio",
+            "creator":"initiator",
+            "transport":{
+               "transType":"iceUdp",
+               "candidates":[
+                  {
+                     "foundation":"1531032027",
+                     "component":"1",
+                     "protocol":"udp",
+                     "priority":"2113937151",
+                     "ip":"10.12.148.67",
+                     "port":"34140",
+                     "type":"host",
+                     "generation":"0",
+                     "network":"1",
+                     "id":"0.fv96czrdje"
+                  }
+               ]
+            }
+         }
+      ],
+      "sid":"1382399117924",
+      "action":"transport-info"
+   }
+}
