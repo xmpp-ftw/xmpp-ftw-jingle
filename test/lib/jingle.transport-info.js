@@ -5,12 +5,13 @@ var should = require('should')
 
 describe('Jingle', function() {
 
-    var jingle, socket, xmpp, manager, request
+    var jingle, socket, xmpp, manager, request, stanza
 
     before(function() {
         request = require('../resources/json/transport-info.json')
-        socket = new helper.Eventer()
-        xmpp = new helper.Eventer()
+        stanza  = helper.getStanza('stanzas/transport-info')
+        socket  = new helper.Eventer()
+        xmpp    = new helper.Eventer()
         manager = {
             socket: socket,
             client: xmpp,
@@ -36,7 +37,7 @@ describe('Jingle', function() {
         jingle.init(manager)
     })
 
-    describe('Transport Info', function() {
+    describe('Outgoing transport Info', function() {
       
         it('Errors if no callback provided', function(done) {
             xmpp.once('stanza', function() {
@@ -203,6 +204,14 @@ describe('Jingle', function() {
             })
             socket.emit('xmpp.jingle.info', request, function() {})
         })
+    })
+    
+    describe('Incoming transport Info', function() {
+        
+        it('Handles jingle requests', function() {
+            jingle.handles(stanza).should.be.true
+        })
+        
     })
 
 })
