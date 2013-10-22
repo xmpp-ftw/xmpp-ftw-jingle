@@ -131,14 +131,8 @@ describe('Jingle', function() {
             )
         })
 
-        /*it('Sends expected stanza', function(done) {
-            var request = {
-                to: 'juliet@shakespeare.lit/balcony',
-                jingle: {
-                  sid: '12345'
-                }
-            } 
-            
+        it('Sends expected stanza', function(done) {
+
             xmpp.once('stanza', function(stanza) {
                 stanza.is('iq').should.be.true
                 stanza.attrs.id.should.exist
@@ -146,17 +140,69 @@ describe('Jingle', function() {
                 stanza.attrs.type.should.equal('set')
                 var element = stanza.getChild('jingle', jingle.NS)
                 element.should.exist
-                element.attrs.action.should.equal('session-initiate')
+                element.attrs.action.should.equal('transport-info')
                 element.attrs.sid.should.equal(request.jingle.sid)
-                element.attrs.initiator.should.equal(
-                   manager.fullJid.user + '@' + manager.fullJid.domain + '/' +
-                   manager.fullJid.resource
-                )
                 done()
             })
             socket.emit('xmpp.jingle.info', request, function() {})
-        })*/
+        })
 
+        it('Sends expected stanza with content element', function(done) {
+
+            xmpp.once('stanza', function(stanza) {
+                var elements = stanza.getChild('jingle', jingle.NS)
+                    .getChildren('content')
+                elements.length.should.equal(1)
+                var content = elements[0]
+                content.attrs.name.should.equal(request.jingle.contents[0].name)
+                content.attrs.creator
+                    .should.equal(request.jingle.contents[0].creator)
+                
+                done()
+            })
+            socket.emit('xmpp.jingle.info', request, function() {})
+        })
+
+        it('Sends expected stanza with transport element', function(done) {
+            
+            xmpp.once('stanza', function(stanza) {
+                var transport = stanza.getChild('jingle', jingle.NS)
+                    .getChildren('content')[0]
+                    .getChild('transport', jingle.NS_TRANSPORT)
+                transport.should.exist
+                done()
+            })
+            socket.emit('xmpp.jingle.info', request, function() {})
+        })
+
+        it('Sends expected stanza with transport candidates', function(done) {
+            
+            var candidateRequest = request.jingle.contents[0].transport.candidates[0]
+            
+            xmpp.once('stanza', function(stanza) {
+                var candidates = stanza.getChild('jingle', jingle.NS)
+                    .getChildren('content')[0]
+                    .getChild('transport', jingle.NS_TRANSPORT)
+                    .getChildren('candidate')
+                candidates.length.should.equal(1)
+                var candidate = candidates[0]
+                candidate.attrs.type.should.equal(candidateRequest.type)
+                candidate.attrs.protocol.should.equal(candidateRequest.protocol)
+                candidate.attrs.id.should.equal(candidateRequest.id)
+                candidate.attrs.ip.should.equal(candidateRequest.ip)
+                candidate.attrs.component
+                    .should.equal(candidateRequest.component)
+                candidate.attrs.port.should.equal(candidateRequest.port)
+                candidate.attrs.foundation
+                    .should.equal(candidateRequest.foundation)
+                candidate.attrs.generation
+                    .should.equal(candidateRequest.generation)
+                candidate.attrs.priority.should.equal(candidateRequest.priority)
+                candidate.attrs.network.should.equal(candidateRequest.network)
+                done()
+            })
+            socket.emit('xmpp.jingle.info', request, function() {})
+        })
     })
 
 })
