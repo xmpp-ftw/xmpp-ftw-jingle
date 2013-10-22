@@ -1,4 +1,4 @@
-<iq xmlns="jabber:client" id="4" type="set" to="romeo@shakespeare.lit/desktop" from="juliet@shakespeare.lit/balcony" xml:lang="" xmlns="http://www.w3.org/XML/1998/namespace">
+<iq xmlns="jabber:client" id="4" type="set" to="romeo@shakespeare.lit/desktop" from="juliet@shakespeare.lit/balcony">
 	<jingle xmlns="urn:xmpp:jingle:1" action="session-accept" sid="1382385667733">
 		<content name="audio" senders="both">
 			<description xmlns="urn:xmpp:jingle:apps:rtp:1" ssrc="3670135077" media="audio">
