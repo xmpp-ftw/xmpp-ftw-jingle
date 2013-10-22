@@ -8,7 +8,7 @@ describe('Jingle', function() {
     var jingle, socket, xmpp, manager, request
 
     before(function() {
-        request = require('../resources/initiate.json')
+        request = require('../resources/json/initiate.json')
         socket = new helper.Eventer()
         xmpp = new helper.Eventer()
         manager = {
