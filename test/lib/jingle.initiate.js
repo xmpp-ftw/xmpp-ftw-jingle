@@ -5,10 +5,11 @@ var should = require('should')
 
 describe('Jingle', function() {
 
-    var jingle, socket, xmpp, manager, request
+    var jingle, socket, xmpp, manager, request, stanza
 
     before(function() {
         request = require('../resources/json/initiate.json')
+        stanza  = helper.getStanza('stanzas/accept')
         socket = new helper.Eventer()
         xmpp = new helper.Eventer()
         manager = {
@@ -368,6 +369,20 @@ describe('Jingle', function() {
             }
             socket.emit('xmpp.jingle.initiate', request, callback)
         })
+    })
+    
+    describe('Incoming accept request', function() {
+
+        it('Generates expected JSON payload', function(done) {
+            socket.on('xmpp.jingle.accept', function(data) {
+                JSON.stringify(data).should.eql(
+                    JSON.stringify(require('../resources/json/accept.json'))
+                )
+                done()
+            })
+            jingle.handle(stanza).should.be.true
+        })
+        
     })
 
 })

@@ -1,0 +1,150 @@
+{
+   "from":"juliet@shakespeare.lit/balcony",
+   "type":"set",
+   "sid":"1382385667733",
+   "action":"session-accept",
+   "jingle":{
+      "contents":[
+         {
+            "name":"audio",
+            "description":{
+               "descType":"rtp",
+               "media":"audio",
+               "payloads":[
+                  {
+                     "id":"111",
+                     "name":"opus",
+                     "clockrate":"48000",
+                     "channels":"2",
+                     "feedback":[
+
+                     ],
+                     "parameters":[
+                        {
+                           "key":"minptime",
+                           "value":"10"
+                        }
+                     ]
+                  },
+                  {
+                     "id":"103",
+                     "name":"ISAC",
+                     "clockrate":"16000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  },
+                  {
+                     "id":"104",
+                     "name":"ISAC",
+                     "clockrate":"32000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  },
+                  {
+                     "id":"0",
+                     "name":"PCMU",
+                     "clockrate":"8000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  },
+                  {
+                     "id":"8",
+                     "name":"PCMA",
+                     "clockrate":"8000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  },
+                  {
+                     "id":"106",
+                     "name":"CN",
+                     "clockrate":"32000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  },
+                  {
+                     "id":"105",
+                     "name":"CN",
+                     "clockrate":"16000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  },
+                  {
+                     "id":"13",
+                     "name":"CN",
+                     "clockrate":"8000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  },
+                  {
+                     "id":"126",
+                     "name":"telephone-event",
+                     "clockrate":"8000",
+                     "channels":"1",
+                     "feedback":[
+
+                     ]
+                  }
+               ],
+               "feedback":[
+
+               ],
+               "headerExtensions":[
+                  {
+                     "id":"1",
+                     "senders":"both",
+                     "uri":"urn:ietf:params:rtp-hdrext:ssrc-audio-level"
+                  }
+               ],
+               "ssrc":"3670135077",
+               "mux":true,
+               "ssrcs":[
+                  {
+                     "cname":"sb0WiD9k1VVvLgGA",
+                     "msid":"63vus9w1v1o3pOEyQfyMsrXYosWaJLeeQaVi 63vus9w1v1o3pOEyQfyMsrXYosWaJLeeQaVia0",
+                     "mslabel":"63vus9w1v1o3pOEyQfyMsrXYosWaJLeeQaVi",
+                     "ssrc":"3670135077",                                                                  "label":"63vus9w1v1o3pOEyQfyMsrXYosWaJLeeQaVia0"
+                  }
+               ]
+            },
+            "transport":{
+               "transType":"iceUdp",
+               "candidates":[
+
+               ],
+               "fingerprints":[
+                  {
+                     "hash":"sha-256",
+                     "value":"EE:17:2D:2D:B6:55:5F:28:88:71:87:FD:FD:6F:1C:8D:E3:24:E5:C0"
+                  }
+               ],
+               "ufrag":"DgY9QYq8+FtVUxmF",
+               "pwd":"e6RSC7lTwqz1eTw34zeFz5a7"
+            },
+            "senders":"both"
+         }
+      ],
+      "groupings":[
+         {
+            "semantics":"BUNDLE",
+            "contents":[
+               "audio",
+               "video"
+            ]
+         }
+      ]
+   }
+}

@@ -1,0 +1,31 @@
+<iq xmlns="jabber:client" id="4" type="set" to="romeo@shakespeare.lit/desktop" from="juliet@shakespeare.lit/balcony" xml:lang="" xmlns="http://www.w3.org/XML/1998/namespace">
+	<jingle xmlns="urn:xmpp:jingle:1" action="session-accept" sid="1382385667733">
+		<content name="audio" senders="both">
+			<description xmlns="urn:xmpp:jingle:apps:rtp:1" ssrc="3670135077" media="audio">
+				<payload-type name="opus" clockrate="48000" id="111" channels="2">
+					<parameter value="10" name="minptime"/>
+				</payload-type>
+				<payload-type name="ISAC" clockrate="16000" id="103" channels="1"/>
+				<payload-type name="ISAC" clockrate="32000" id="104" channels="1"/>
+				<payload-type name="PCMU" clockrate="8000" id="0" channels="1"/>
+				<payload-type name="PCMA" clockrate="8000" id="8" channels="1"/>
+				<payload-type name="CN" clockrate="32000" id="106" channels="1"/>
+				<payload-type name="CN" clockrate="16000" id="105" channels="1"/>
+				<payload-type name="CN" clockrate="8000" id="13" channels="1"/>
+				<payload-type name="telephone-event" clockrate="8000" id="126" channels="1"/>
+				<rtp-hdrext xmlns="urn:xmpp:jingle:apps:rtp:rtp-hdrext:0" id="1" senders="both" uri="urn:ietf:params:rtp-hdrext:ssrc-audio-level"/>
+				<rtcp-mux/>
+				<ssrc xmlns="http://estos.de/ns/ssrc" msid="63vus9w1v1o3pOEyQfyMsrXYosWaJLeeQaVi 63vus9w1v1o3pOEyQfyMsrXYosWaJLeeQaVia0" ssrc="3670135077" label="63vus9w1v1o3pOEyQfyMsrXYosWaJLeeQaVia0" cname="sb0WiD9k1VVvLgGA" mslabel="63vus9w1v1o3pOEyQfyMsrXYosWaJLeeQaVi"/>
+			</description>
+			<transport xmlns="urn:xmpp:jingle:transports:ice-udp:1" pwd="e6RSC7lTwqz1eTw34zeFz5a7" ufrag="DgY9QYq8+FtVUxmF">
+				<fingerprint xmlns="urn:xmpp:tmp:jingle:apps:dtls:0" hash="sha-256">
+					EE:17:2D:2D:B6:55:5F:28:88:71:87:FD:FD:6F:1C:8D:E3:24:E5:C0
+				</fingerprint>
+			</transport>
+		</content>
+		<group xmlns="urn:ietf:rfc:5888" semantics="BUNDLE">
+			<content name="audio"/>
+			<content name="video"/>
+		</group>
+	</jingle>
+</iq>
