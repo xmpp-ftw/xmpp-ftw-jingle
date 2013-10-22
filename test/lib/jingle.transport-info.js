@@ -211,8 +211,10 @@ describe('Jingle', function() {
 
         it('Generates expected JSON payload', function(done) {
             socket.on('xmpp.jingle.info', function(data) {
-                data.should.eql(
-                    require('../resources/json/transport-info-incoming.json')
+                JSON.stringify(data).should.eql(
+                    JSON.stringify(
+                        require('../resources/json/transport-info-incoming.json')
+                    )
                 )
                 done()
             })
