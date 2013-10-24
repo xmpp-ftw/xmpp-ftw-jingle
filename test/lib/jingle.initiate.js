@@ -51,7 +51,7 @@ describe('Jingle', function() {
                 xmpp.removeAllListeners('stanza')
                 done()
             })
-            socket.emit('xmpp.jingle.initiate', {})
+            socket.emit('xmpp.jingle.request', {})
         })
         
         it('Errors if non-functional callback provided', function(done) {
@@ -66,7 +66,7 @@ describe('Jingle', function() {
                 xmpp.removeAllListeners('stanza')
                 done()
             })
-            socket.emit('xmpp.jingle.initiate', {}, true)
+            socket.emit('xmpp.jingle.request', {}, true)
         })
             
         it('Errors if no \'to\' key provided', function(done) {
@@ -84,7 +84,7 @@ describe('Jingle', function() {
                 done()
             }
             socket.emit(
-                'xmpp.jingle.initiate',
+                'xmpp.jingle.request',
                 request,
                 callback
             )
@@ -105,7 +105,7 @@ describe('Jingle', function() {
                 done()
             }
             socket.emit(
-                'xmpp.jingle.initiate',
+                'xmpp.jingle.request',
                 request,
                 callback
             )
@@ -126,7 +126,31 @@ describe('Jingle', function() {
                 done()
             }
             socket.emit(
-                'xmpp.jingle.initiate',
+                'xmpp.jingle.request',
+                request,
+                callback
+            )
+        })
+
+        it('Errors if there\'s no \'action\' key', function(done) {
+            var request = {
+                to: 'juliet@shakespeare.lit', 
+                jingle: { sid: '1234' }
+            }
+            xmpp.once('stanza', function() {
+                done('Unexpected outgoing stanza')
+            })
+            var callback = function(error, success) {
+                should.not.exist(success)
+                error.type.should.equal('modify')
+                error.condition.should.equal('client-error')
+                error.description.should.equal('Missing \'action\' key')
+                error.request.should.eql(request)
+                xmpp.removeAllListeners('stanza')
+                done()
+            }
+            socket.emit(
+                'xmpp.jingle.request',
                 request,
                 callback
             )
@@ -136,7 +160,8 @@ describe('Jingle', function() {
             var request = {
                 to: 'juliet@shakespeare.lit/balcony',
                 jingle: {
-                  sid: '12345'
+                  sid: '12345',
+                  action: 'some-action'
                 }
             } 
             
@@ -147,7 +172,7 @@ describe('Jingle', function() {
                 stanza.attrs.type.should.equal('set')
                 var element = stanza.getChild('jingle', jingle.NS)
                 element.should.exist
-                element.attrs.action.should.equal('session-initiate')
+                element.attrs.action.should.equal(request.jingle.action)
                 element.attrs.sid.should.equal(request.jingle.sid)
                 element.attrs.initiator.should.equal(
                    manager.fullJid.user + '@' + manager.fullJid.domain + '/' +
@@ -155,7 +180,7 @@ describe('Jingle', function() {
                 )
                 done()
             })
-            socket.emit('xmpp.jingle.initiate', request, function() {})
+            socket.emit('xmpp.jingle.request', request, function() {})
         })
 
         it('Sends expected stanza with contents', function(done) {
@@ -184,7 +209,7 @@ describe('Jingle', function() {
                     .should.equal(request.jingle.contents[1].senders)
                 done()
             })
-            socket.emit('xmpp.jingle.initiate', request, function() {})
+            socket.emit('xmpp.jingle.request', request, function() {})
         })
 
         it('Sends expected stanza with description', function(done) {
@@ -216,7 +241,7 @@ describe('Jingle', function() {
 
                 done()
             })
-            socket.emit('xmpp.jingle.initiate', request, function() {})
+            socket.emit('xmpp.jingle.request', request, function() {})
         })
 
         it('Sends expected stanza with payload description', function(done) {
@@ -243,7 +268,7 @@ describe('Jingle', function() {
 
                 done()
             })
-            socket.emit('xmpp.jingle.initiate', request, function() {})
+            socket.emit('xmpp.jingle.request', request, function() {})
         }) 
         
         it('Sends expected stanza with encryption description', function(done) {
@@ -266,7 +291,7 @@ describe('Jingle', function() {
                 should.not.exist(encryption.attrs['session-params'])
                 done()
             })
-            socket.emit('xmpp.jingle.initiate', request, function() {})
+            socket.emit('xmpp.jingle.request', request, function() {})
         })
         
         it('Sends expected stanza with misc description fields', function(done) {
@@ -302,7 +327,7 @@ describe('Jingle', function() {
                     .should.equal(miscRequest.headerExtensions[0].senders)
                 done()
             })
-            socket.emit('xmpp.jingle.initiate', request, function() {})
+            socket.emit('xmpp.jingle.request', request, function() {})
         })        
 
         it('Sends expected stanza with transport', function(done) {
@@ -319,7 +344,7 @@ describe('Jingle', function() {
                 transport.attrs.ufrag.should.equal(transportRequest.ufrag)
                 done()
             })
-            socket.emit('xmpp.jingle.initiate', request, function() {})
+            socket.emit('xmpp.jingle.request', request, function() {})
         })
 
         it('Sends expected stanza with transport fingerprints', function(done) {
@@ -339,7 +364,7 @@ describe('Jingle', function() {
 
                 done()
             })
-            socket.emit('xmpp.jingle.initiate', request, function() {})
+            socket.emit('xmpp.jingle.request', request, function() {})
         }) 
         
         it('Can handle an error response', function(done) {
@@ -354,7 +379,7 @@ describe('Jingle', function() {
                 xmpp.removeAllListeners('stanza')
                 done()
             }
-            socket.emit('xmpp.jingle.initiate', request, callback)
+            socket.emit('xmpp.jingle.request', request, callback)
         })
         
         it('Can handle an success response', function(done) {
@@ -367,14 +392,14 @@ describe('Jingle', function() {
                 success.should.be.true
                 done()
             }
-            socket.emit('xmpp.jingle.initiate', request, callback)
+            socket.emit('xmpp.jingle.request', request, callback)
         })
     })
     
     describe('Incoming accept request', function() {
 
         it('Generates expected JSON payload', function(done) {
-            socket.on('xmpp.jingle.accept', function(data) {
+            socket.on('xmpp.jingle.request', function(data) {
                 JSON.stringify(data).should.eql(
                     JSON.stringify(require('../resources/json/accept.json'))
                 )
