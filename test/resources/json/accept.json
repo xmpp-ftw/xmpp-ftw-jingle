@@ -1,9 +1,9 @@
 {
    "from":"juliet@shakespeare.lit/balcony",
    "type":"set",
-   "sid":"1382385667733",
-   "action":"session-accept",
    "jingle":{
+      "sid":"1382385667733",
+      "action":"session-accept",
       "contents":[
          {
             "name":"audio",
