@@ -1,6 +1,7 @@
 {
    "to":"peer@example.com/resouce",
    "type":"set",
+   "id":"jingle:1",
    "jingle":{
       "contents":[
          {

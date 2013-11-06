@@ -1,4 +1,4 @@
-<iq xmlns="jabber:client" id="6" type="set" to="romeo@shakespeare.lit/desktop" from="juliet@shakespeare.lit/balcony">
+<iq xmlns="jabber:client" id="transport-info:1" type="set" to="romeo@shakespeare.lit/desktop" from="juliet@shakespeare.lit/balcony">
     <jingle xmlns="urn:xmpp:jingle:1" action="transport-info" sid="1382399117924">
         <content name="audio" creator="initiator">
             <transport xmlns="urn:xmpp:jingle:transports:ice-udp:1">

@@ -1,6 +1,7 @@
 {
    "from":"juliet@shakespeare.lit/balcony",
    "type":"set",
+   "id":"transport-info:1",
    "jingle":{
       "sid":"1382399117924",
       "action":"transport-info",

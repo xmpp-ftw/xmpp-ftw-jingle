@@ -1,4 +1,4 @@
-<iq xmlns="jabber:client" id="6dc8388e-80e5-4abd-8497-729dec02c489-5" type="set" to="8e29e462-ea4e-44b8-b10a-bac5539bedac@anon.lance.im/83207ca9-b444-478d-baee-59ef1a67769d" from="6f5a5a90-74da-47a2-b178-dc81b8927962@anon.lance.im/52e3bcdb-348a-4328-959a-c7da726c4852" xml:lang="" xmlns="http://www.w3.org/XML/1998/namespace">
+<iq xmlns="jabber:client" id="jingle:1" type="set" to="8e29e462-ea4e-44b8-b10a-bac5539bedac@anon.lance.im/83207ca9-b444-478d-baee-59ef1a67769d" from="6f5a5a90-74da-47a2-b178-dc81b8927962@anon.lance.im/52e3bcdb-348a-4328-959a-c7da726c4852" xml:lang="" xmlns="http://www.w3.org/XML/1998/namespace">
   <jingle xmlns="urn:xmpp:jingle:1" action="session-initiate" sid="1382385667733">
     <content name="audio" senders="both" creator="initiator">
       <description xmlns="urn:xmpp:jingle:apps:rtp:1" ssrc="1051892989" media="audio">
