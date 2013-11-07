@@ -159,6 +159,7 @@ describe('Jingle', function() {
         it('Sends expected stanza', function(done) {
             var request = {
                 to: 'juliet@shakespeare.lit/balcony',
+                type: 'set',
                 jingle: {
                   sid: '12345',
                   action: 'some-action'
@@ -168,16 +169,12 @@ describe('Jingle', function() {
             xmpp.once('stanza', function(stanza) {
                 stanza.is('iq').should.be.true
                 stanza.attrs.id.should.exist
-                stanza.attrs.to.should.equal(request.to) 
-                stanza.attrs.type.should.equal('set')
+                stanza.attrs.to.should.equal(request.to)
+                stanza.attrs.type.should.equal(request.type)
                 var element = stanza.getChild('jingle', jingle.NS)
                 element.should.exist
                 element.attrs.action.should.equal(request.jingle.action)
                 element.attrs.sid.should.equal(request.jingle.sid)
-                element.attrs.initiator.should.equal(
-                   manager.fullJid.user + '@' + manager.fullJid.domain + '/' +
-                   manager.fullJid.resource
-                )
                 done()
             })
             socket.emit('xmpp.jingle.request', request, function() {})
