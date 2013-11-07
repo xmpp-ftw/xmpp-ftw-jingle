@@ -1,6 +1,6 @@
 {
   "name": "xmpp-ftw-jingle",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Jingle (XEP-0084) plugin for XMPP-FTW",
   "main": "index.js",
   "directories": {
