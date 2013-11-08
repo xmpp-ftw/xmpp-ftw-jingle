@@ -140,7 +140,7 @@
       ],
       "groupings":[
          {
-            "semantics":"BUNDLE",
+            "type":"BUNDLE",
             "contents":[
                "audio",
                "video"
