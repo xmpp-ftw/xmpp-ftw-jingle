@@ -316,7 +316,7 @@ describe('Jingle', function() {
                 var headers = description.getChildren(miscRequest.descType + '-hdrext')
                 headers.length.should.equal(1)
                 var header = headers[0]
-                header.attrs.xmlns
+                header.attrs.uri
                     .should.equal(miscRequest.headerExtensions[0].uri)
                 header.attrs.id
                     .should.equal(miscRequest.headerExtensions[0].id)
