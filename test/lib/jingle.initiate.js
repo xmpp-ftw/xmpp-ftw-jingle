@@ -343,6 +343,21 @@ describe('Jingle', function() {
             })
             socket.emit('xmpp.jingle.request', request, function() {})
         })
+              
+        it('Adds \'group\' details', function(done) {
+            xmpp.once('stanza', function(stanza) {
+                var group = stanza.getChild('jingle', jingle.NS)
+                    .getChild('group', jingle.NS_GROUP)
+                group.should.exist
+                group.attrs.type.should.equal('BUNDLE')
+                group.getChildren('content').length.should.equal(2)
+                var content = group.getChildren('content')
+                content[0].attrs.name.should.equal('audio')
+                content[1].attrs.name.should.equal('video')
+                done()
+            })
+            socket.emit('xmpp.jingle.request', request, function() {})            
+        })
 
         it('Sends expected stanza with transport fingerprints', function(done) {
 
@@ -391,6 +406,7 @@ describe('Jingle', function() {
             }
             socket.emit('xmpp.jingle.request', request, callback)
         })
+
     })
     
     describe('Incoming accept request', function() {
