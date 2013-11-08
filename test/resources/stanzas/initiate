@@ -45,7 +45,7 @@
         <fingerprint xmlns="urn:xmpp:tmp:jingle:apps:dtls:0" hash="sha-1">EE:17:2D:2D:B6:55:5F:28:88:71:87:FD:FD:6F:1C:8D:E3:24:E5:C0</fingerprint>
       </transport>
     </content>
-    <group xmlns="urn:ietf:rfc:5888" semantics="BUNDLE">
+    <group xmlns="urn:ietf:rfc:5888" type="BUNDLE">
       <content name="audio"/>
       <content name="video"/>
     </group>

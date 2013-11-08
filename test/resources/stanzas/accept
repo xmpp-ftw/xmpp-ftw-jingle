@@ -23,7 +23,7 @@
 				</fingerprint>
 			</transport>
 		</content>
-		<group xmlns="urn:ietf:rfc:5888" semantics="BUNDLE">
+		<group xmlns="urn:ietf:rfc:5888" type="BUNDLE">
 			<content name="audio"/>
 			<content name="video"/>
 		</group>
