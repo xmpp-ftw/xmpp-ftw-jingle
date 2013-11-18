@@ -1,5 +1,5 @@
 {
-   "to":"peer@example.com/resouce",
+   "to":"peer@example.com/resource",
    "type":"set",
    "id":"jingle:1",
    "jingle":{
