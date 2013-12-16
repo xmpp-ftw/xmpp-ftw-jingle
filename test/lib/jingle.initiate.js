@@ -38,7 +38,7 @@ describe('Jingle', function() {
     })
 
     describe('Initiate', function() {
-      
+
         it('Errors if no callback provided', function(done) {
             xmpp.once('stanza', function() {
                 done('Unexpected outgoing stanza')
@@ -53,7 +53,7 @@ describe('Jingle', function() {
             })
             socket.emit('xmpp.jingle.request', {})
         })
-        
+
         it('Errors if non-functional callback provided', function(done) {
             xmpp.once('stanza', function() {
                 done('Unexpected outgoing stanza')
@@ -68,7 +68,7 @@ describe('Jingle', function() {
             })
             socket.emit('xmpp.jingle.request', {}, true)
         })
-            
+
         it('Errors if no \'to\' key provided', function(done) {
             var request = {}
             xmpp.once('stanza', function() {
@@ -134,7 +134,7 @@ describe('Jingle', function() {
 
         it('Errors if there\'s no \'action\' key', function(done) {
             var request = {
-                to: 'juliet@shakespeare.lit', 
+                to: 'juliet@shakespeare.lit',
                 jingle: { sid: '1234' }
             }
             xmpp.once('stanza', function() {
@@ -164,8 +164,8 @@ describe('Jingle', function() {
                   sid: '12345',
                   action: 'some-action'
                 }
-            } 
-            
+            }
+
             xmpp.once('stanza', function(stanza) {
                 stanza.is('iq').should.be.true
                 stanza.attrs.id.should.exist
@@ -195,7 +195,7 @@ describe('Jingle', function() {
                     .should.equal(request.jingle.contents[0].name)
                 content.attrs.senders
                     .should.equal(request.jingle.contents[0].senders)
-                
+
                 content = contents[1]
                 content.should.exist
                 content.attrs.creator
@@ -229,7 +229,7 @@ describe('Jingle', function() {
                 payload.attrs.clockrate.should.equal(requestPayload.clockrate)
                 payload.attrs.name.should.equal(requestPayload.name)
                 payload.attrs.id.should.equal(requestPayload.id)
-                
+
                 var parameters = payload.getChildren('parameter')
                 parameters.length.should.equal(1)
                 var parameter = parameters[0]
@@ -256,7 +256,7 @@ describe('Jingle', function() {
                 payload.attrs.clockrate.should.equal(requestPayload.clockrate)
                 payload.attrs.name.should.equal(requestPayload.name)
                 payload.attrs.id.should.equal(requestPayload.id)
-                
+
                 var parameters = payload.getChildren('parameter')
                 parameters.length.should.equal(1)
                 var parameter = parameters[0]
@@ -266,8 +266,8 @@ describe('Jingle', function() {
                 done()
             })
             socket.emit('xmpp.jingle.request', request, function() {})
-        }) 
-        
+        })
+
         it('Sends expected stanza with encryption description', function(done) {
 
             xmpp.once('stanza', function(stanza) {
@@ -278,7 +278,7 @@ describe('Jingle', function() {
                     .getChild('encryption').getChildren('crypto')
                 encryptions.length.should.equal(1)
                 var encryption = encryptions[0]
-                
+
                 var encryptionRequest = request.jingle.contents[0]
                     .description
                     .encryption[0]
@@ -290,7 +290,7 @@ describe('Jingle', function() {
             })
             socket.emit('xmpp.jingle.request', request, function() {})
         })
-        
+
         it('Sends expected stanza with misc description fields', function(done) {
 
             xmpp.once('stanza', function(stanza) {
@@ -299,9 +299,9 @@ describe('Jingle', function() {
                      .getChildren('content')[0]
                     .getChild('description', jingle.NS_RTP)
                 description.getChild('rtcp-mux').should.exist
-                
+
                 var miscRequest = request.jingle.contents[0].description
-                
+
                 var ssrcs = description.getChildren('ssrc')
                 ssrcs.length.should.equal(1)
                 var ssrc = ssrcs[0]
@@ -312,7 +312,7 @@ describe('Jingle', function() {
                 ssrc.attrs.label.should.equal(miscRequest.ssrcs[0].label)
                 ssrc.attrs.mslabel.should.equal(miscRequest.ssrcs[0].mslabel)
                 ssrc.attrs.cname.should.equal(miscRequest.ssrcs[0].cname)
-                
+
                 var headers = description.getChildren(miscRequest.descType + '-hdrext')
                 headers.length.should.equal(1)
                 var header = headers[0]
@@ -325,7 +325,7 @@ describe('Jingle', function() {
                 done()
             })
             socket.emit('xmpp.jingle.request', request, function() {})
-        })        
+        })
 
         it('Sends expected stanza with transport', function(done) {
 
@@ -335,7 +335,7 @@ describe('Jingle', function() {
                      .getChildren('content')[0]
                      .getChild('transport', jingle.NS_TRANSPORT)
                 var transportRequest = request.jingle.contents[0].transport
-                
+
                 transport.should.exist
                 transport.attrs.pwd.should.equal(transportRequest.pwd)
                 transport.attrs.ufrag.should.equal(transportRequest.ufrag)
@@ -343,7 +343,7 @@ describe('Jingle', function() {
             })
             socket.emit('xmpp.jingle.request', request, function() {})
         })
-              
+
         it('Adds \'group\' details', function(done) {
             xmpp.once('stanza', function(stanza) {
                 var group = stanza.getChild('jingle', jingle.NS)
@@ -356,7 +356,7 @@ describe('Jingle', function() {
                 content[1].attrs.name.should.equal('video')
                 done()
             })
-            socket.emit('xmpp.jingle.request', request, function() {})            
+            socket.emit('xmpp.jingle.request', request, function() {})
         })
 
         it('Sends expected stanza with transport fingerprints', function(done) {
@@ -367,7 +367,7 @@ describe('Jingle', function() {
                      .getChildren('content')[0]
                      .getChild('transport', jingle.NS_TRANSPORT)
                      .getChildren('fingerprint')
-                
+
                 var fingerprintRequest = request.jingle.contents[0].transport.fingerprints
                 fingerprints.length.should.equal(1)
                 fingerprints[0].attrs.xmlns.should.equal(jingle.NS_DTLS)
@@ -377,8 +377,8 @@ describe('Jingle', function() {
                 done()
             })
             socket.emit('xmpp.jingle.request', request, function() {})
-        }) 
-        
+        })
+
         it('Can handle an error response', function(done) {
 
             xmpp.once('stanza', function() {
@@ -393,7 +393,7 @@ describe('Jingle', function() {
             }
             socket.emit('xmpp.jingle.request', request, callback)
         })
-        
+
         it('Can handle an success response', function(done) {
 
             xmpp.once('stanza', function() {
@@ -408,7 +408,7 @@ describe('Jingle', function() {
         })
 
     })
-    
+
     describe('Incoming accept request', function() {
 
         it('Generates expected JSON payload', function(done) {
@@ -420,7 +420,7 @@ describe('Jingle', function() {
             })
             jingle.handle(stanza).should.be.true
         })
-        
+
     })
 
 })

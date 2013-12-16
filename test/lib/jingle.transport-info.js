@@ -10,7 +10,7 @@ describe('Jingle', function() {
     before(function() {
         request = require('../resources/json/transport-info.json')
         stanza  = helper.getStanza('stanzas/transport-info')
-        
+
         socket  = new helper.Eventer()
         xmpp    = new helper.Eventer()
         manager = {
@@ -39,7 +39,7 @@ describe('Jingle', function() {
     })
 
     describe('Outgoing transport Info', function() {
-      
+
         it('Errors if no callback provided', function(done) {
             xmpp.once('stanza', function() {
                 done('Unexpected outgoing stanza')
@@ -54,7 +54,7 @@ describe('Jingle', function() {
             })
             socket.emit('xmpp.jingle.request', {})
         })
-        
+
         it('Errors if non-functional callback provided', function(done) {
             xmpp.once('stanza', function() {
                 done('Unexpected outgoing stanza')
@@ -69,7 +69,7 @@ describe('Jingle', function() {
             })
             socket.emit('xmpp.jingle.request', {}, true)
         })
-            
+
         it('Errors if no \'to\' key provided', function(done) {
             var request = {}
             xmpp.once('stanza', function() {
@@ -138,7 +138,7 @@ describe('Jingle', function() {
             xmpp.once('stanza', function(stanza) {
                 stanza.is('iq').should.be.true
                 stanza.attrs.id.should.exist
-                stanza.attrs.to.should.equal(request.to) 
+                stanza.attrs.to.should.equal(request.to)
                 stanza.attrs.type.should.equal('set')
                 var element = stanza.getChild('jingle', jingle.NS)
                 element.should.exist
@@ -159,14 +159,14 @@ describe('Jingle', function() {
                 content.attrs.name.should.equal(request.jingle.contents[0].name)
                 content.attrs.creator
                     .should.equal(request.jingle.contents[0].creator)
-                
+
                 done()
             })
             socket.emit('xmpp.jingle.request', request, function() {})
         })
 
         it('Sends expected stanza with transport element', function(done) {
-            
+
             xmpp.once('stanza', function(stanza) {
                 var transport = stanza.getChild('jingle', jingle.NS)
                     .getChildren('content')[0]
@@ -178,9 +178,9 @@ describe('Jingle', function() {
         })
 
         it('Sends expected stanza with transport candidates', function(done) {
-            
+
             var candidateRequest = request.jingle.contents[0].transport.candidates[0]
-            
+
             xmpp.once('stanza', function(stanza) {
                 var candidates = stanza.getChild('jingle', jingle.NS)
                     .getChildren('content')[0]
@@ -206,7 +206,7 @@ describe('Jingle', function() {
             socket.emit('xmpp.jingle.request', request, function() {})
         })
     })
-    
+
     describe('Incoming transport Info', function() {
 
         it('Generates expected JSON payload', function(done) {
@@ -220,7 +220,7 @@ describe('Jingle', function() {
             })
             jingle.handle(stanza).should.be.trues
         })
-        
+
     })
 
 })

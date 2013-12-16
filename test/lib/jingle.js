@@ -30,11 +30,11 @@ describe('Jingle', function() {
             jingle.handles(helper.getStanza('stanzas/transport-info'))
                 .should.be.true
         })
-        
+
         it('Returns false for other stanzas', function() {
             jingle.handles(ltx.parse('<iq/>')).should.be.false
         })
-        
+
     })
 
 })
