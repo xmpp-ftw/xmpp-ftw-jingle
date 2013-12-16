@@ -1,5 +1,5 @@
 var should = require('should')
-  , Jingle = require('../../lib/jingle')
+  , Jingle = require('../../index')
   , ltx    = require('ltx')
   , helper = require('../helper')
 
