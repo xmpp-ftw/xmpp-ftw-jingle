@@ -1,8 +1,10 @@
+'use strict';
+
 var should = require('should')
   , Jingle = require('../../index')
-  , ltx    = require('ltx')
   , helper = require('../helper')
 
+/* jshint -W030 */
 describe('Jingle', function() {
 
     var jingle, socket, xmpp, manager, request, stanza

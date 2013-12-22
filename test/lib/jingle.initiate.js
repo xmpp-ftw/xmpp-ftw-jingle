@@ -1,8 +1,10 @@
+'use strict';
+
 var should = require('should')
   , Jingle = require('../../index')
-  , ltx    = require('ltx')
   , helper = require('../helper')
 
+/* jshint -W030 */
 describe('Jingle', function() {
 
     var jingle, socket, xmpp, manager, request, stanza
@@ -31,6 +33,7 @@ describe('Jingle', function() {
                     case 'full':
                         return 'romeo@montague.lit/laptop'
                 }
+                throw new Error('Unexpected value')
             }
         }
         jingle = new Jingle()
@@ -161,8 +164,8 @@ describe('Jingle', function() {
                 to: 'juliet@shakespeare.lit/balcony',
                 type: 'set',
                 jingle: {
-                  sid: '12345',
-                  action: 'some-action'
+                    sid: '12345',
+                    action: 'some-action'
                 }
             }
 

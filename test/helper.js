@@ -1,3 +1,5 @@
+'use strict';
+
 var ltx = require('ltx')
   , fs = require('fs')
   , Event = require('events').EventEmitter
@@ -11,12 +13,12 @@ exports.getStanza = function(file) {
 }
 
 var Eventer = function() {}
-Eventer.prototype.__proto__ = Event.prototype
+Eventer.prototype = Event.prototype
 Eventer.prototype.send = function(stanza) {
     this.emit('stanza', stanza.root())
 }
 exports.Eventer = Eventer
 
 exports.failingItemParser = function() {
-   throw new Error('FAIL!')
+    throw new Error('FAIL!')
 }
