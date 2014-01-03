@@ -10,8 +10,8 @@ describe('Jingle', function() {
     var jingle, socket, xmpp, manager
 
     before(function() {
-        socket = new helper.Eventer()
-        xmpp = new helper.Eventer()
+        socket = new helper.SocketEventer()
+        xmpp = new helper.XmppEventer()
         manager = {
             socket: socket,
             client: xmpp,
@@ -23,6 +23,12 @@ describe('Jingle', function() {
             }
         }
         jingle = new Jingle()
+        jingle.init(manager)
+    })
+
+    beforeEach(function() {
+        socket.removeAllListeners()
+        xmpp.removeAllListeners()
         jingle.init(manager)
     })
 
