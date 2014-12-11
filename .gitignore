@@ -7,3 +7,4 @@ examples/public/google*
 *.geany
 *~
 *.swp
+coverage
