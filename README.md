@@ -60,6 +60,3 @@ npm i --save xmpp-ftw-jingle
 npm test
 ```
 
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/xmpp-ftw/xmpp-ftw-jingle/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
