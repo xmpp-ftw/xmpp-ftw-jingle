@@ -32,7 +32,7 @@
     "xmpp-ftw": "1.X"
   },
   "devDependencies": {
-    "coveralls": "^2.11.2",
+    "coveralls": "^2.11.5",
     "grunt": "~0.4.2",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-jshint": "~0.7.2",
