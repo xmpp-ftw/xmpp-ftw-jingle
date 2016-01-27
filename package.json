@@ -39,7 +39,7 @@
     "grunt-mocha-cli": "~1.4.0",
     "grunt-mocha-istanbul": "^2.2.0",
     "istanbul": "^0.3.5",
-    "mocha": "~1.8.1",
+    "mocha": "~2.4.3",
     "should": "~1.2.2"
   },
   "peerDependencies": {
