@@ -28,7 +28,7 @@
     "url": "https://github.com/xmpp-ftw/xmpp-ftw-jingle/issues"
   },
   "dependencies": {
-    "ltx": "^0.8.0",
+    "ltx": "^2.6.0",
     "xmpp-ftw": "1.X"
   },
   "devDependencies": {
