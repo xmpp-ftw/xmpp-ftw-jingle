@@ -1,6 +1,8 @@
 xmpp-ftw-jingle
 =================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/xmpp-ftw/xmpp-ftw-jingle.svg)](https://greenkeeper.io/)
+
 A Jingle (XEP-0166) plugin for XMPP-FTW.
 
 https://github.com/xmpp-ftw/xmpp-ftw.git
